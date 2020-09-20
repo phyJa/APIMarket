@@ -4,6 +4,7 @@ const router = express.Router();
 
 const ProductController = require('./controllers/ProductController');
 const ProductValidation = require('./middlewares/ProductValidation');
+const CartModel = require('./model/CartModel');
 
 
 router.get('/products', ProductController.list);
@@ -14,6 +15,7 @@ router.post('/products', ProductValidation, ProductController.create);
 router.put('/products/item/:id', ProductValidation, ProductController.update);
 router.delete('/products/item/:id', ProductController.delete);
 
-router.post('/cart', ItemController.create);
+router.post('/cart/item', ItemController.create);
+router.delete('/cart/item/:id', ItemController.delete);
 
 module.exports = router;

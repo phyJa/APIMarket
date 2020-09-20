@@ -9,10 +9,19 @@ const ItemSchema = new Schema({
     total: {
         type: Number, required: true
     },
-    products: [{
+    products: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'ProductModel',
-    }]
+    },
+    name: {
+        type: String, required: false
+    },
+    price: {
+        type: Number, required: false
+    },
+    mark: {
+        type: String, required: false
+    }
 });
 
 module.exports = mongoose.model('Item', ItemSchema);

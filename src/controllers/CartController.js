@@ -1,8 +1,8 @@
-const ItemModel = require('../model/ItemModel');
-const ProductModel = require('../model/ProductModel');
+const CartModel = require('../model/ItemModel');
+const ItemModel = require('../model/ProductModel');
 const { response } = require('../routes');
 
-class ItemController {
+class CartController {
     async create(req, res) {
         let { qtdeItem, total, products, name, price, mark } = req.body;
         const id = products
@@ -57,7 +57,7 @@ class ItemController {
     }
     
     async delete(req, res) {
-        await ItemModel.deleteOne({ '_id': req.params.id })
+        await ItemModel.deleteOne({ '_id': id })
         .then(response => {
             return res.status(200).json(response)
         })
@@ -67,4 +67,4 @@ class ItemController {
     }
 }
 
-module.exports = new ItemController();
+module.exports = new CartController();
