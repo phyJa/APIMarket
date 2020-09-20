@@ -1,0 +1,895 @@
+{
+    "alias": "Copy of Lógica do Bot da Supermarket",
+    "description": "",
+    "steps": [
+      {
+        "id": "step032",
+        "type": "sendWhatsAppActivity",
+        "contents": [
+          {
+            "type": "text/plain",
+            "payload": {
+              "text": "Ok, o valor total da sua compra é (valor total: banco de dados do carrinho), pago no cartão de crédito! Fechou! Até mais!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "step02",
+        "type": "whatsappEvent",
+        "label": "Usuário responde",
+        "variables": {
+          "answer": "payload"
+        }
+      },
+      {
+        "id": "step024",
+        "type": "sendWhatsAppActivity",
+        "label": "Cancela apagamento",
+        "properties": {
+          "from": "#{session['whatsappFrom']}"
+        },
+        "contents": [
+          {
+            "type": "text/plain",
+            "payload": {
+              "text": "Tudo bem, cancelando apagamento...."
+            }
+          }
+        ]
+      },
+      {
+        "id": "step027",
+        "type": "whatsappEvent",
+        "label": "Digita quantidades",
+        "variables": {
+          "quantidade": "payload"
+        }
+      },
+      {
+        "id": "step04",
+        "type": "sendWhatsAppActivity",
+        "label": "Adiciona produto ao banco",
+        "properties": {
+          "from": "#{session['whatsappFrom']}"
+        },
+        "contents": [
+          {
+            "type": "text/plain",
+            "payload": {
+              "text": "Ok, #{quantidade} quantidades de #{resposta} da marca #{marca} foi adicionada(s) ao seu carrinho de compras!. Se desejar, você pode digitar:\n- \"listar\" para visualizar o seu carrinho;\n- \"apagar\" para tirar algum item;\n- \"add\" para adicionar outro;\n- \"fim\" para finalizar seu pedido.  "
+            }
+          }
+        ]
+      },
+      {
+        "id": "step07",
+        "type": "sendWhatsAppActivity",
+        "label": "Confirmação",
+        "properties": {
+          "from": "#{session['whatsappFrom']}"
+        },
+        "contents": [
+          {
+            "type": "text/plain",
+            "payload": {
+              "text": "Ok, aqui está a nossa lista de produtos disponíveis:\n- Arroz,\n- Feijão,\n- Ovos,\n- Carne\nPor favor, digite o produto que você deseja adicionar ao seu carrinho de compras.\n"
+            }
+          }
+        ]
+      },
+      {
+        "id": "step035",
+        "type": "whatsappEvent",
+        "label": "Escolhe a marca",
+        "variables": {
+          "marca": "payload"
+        }
+      },
+      {
+        "id": "step016",
+        "type": "whatsappEvent",
+        "label": "Usuário escolhe",
+        "variables": {
+          "answer": "payload"
+        }
+      },
+      {
+        "id": "step033",
+        "type": "sendWhatsAppActivity",
+        "contents": [
+          {
+            "type": "text/plain",
+            "payload": {
+              "text": "Hmmm não entendi... Por favor, digite uma destas três opções:\n- \"cc\" para cartão de crédito;\n- \"cd\" para cartão de débito;\n- \"din\" para dinheiro"
+            }
+          }
+        ]
+      },
+      {
+        "id": "step021",
+        "type": "whatsappEvent",
+        "label": "usuário confirma",
+        "variables": {
+          "apaga": "payload"
+        }
+      },
+      {
+        "id": "step017",
+        "type": "whatsappEvent",
+        "label": "Usuário escolhe",
+        "variables": {
+          "resposta": "payload"
+        }
+      },
+      {
+        "id": "step036",
+        "type": "sendWhatsAppActivity",
+        "label": "Confirma marca",
+        "properties": {
+          "from": "#{session['whatsappFrom']}"
+        },
+        "contents": [
+          {
+            "type": "text/plain",
+            "payload": {
+              "text": "Confirma \"#{marca}\"?"
+            }
+          }
+        ]
+      },
+      {
+        "id": "step041",
+        "type": "whatsappEvent",
+        "label": "confirma marca",
+        "variables": {
+          "confirma": "payload"
+        }
+      },
+      {
+        "id": "step034",
+        "type": "sendWhatsAppActivity",
+        "label": "Marcas disponíveis",
+        "properties": {
+          "from": "#{session['whatsappFrom']}"
+        },
+        "contents": [
+          {
+            "type": "text/plain",
+            "payload": {
+              "text": "Para o produto \"#{resposta}\", temos as seguintes marcas disponíveis: Digite a sua escolha:\n- Marca 1\n- Marca 2"
+            }
+          }
+        ]
+      },
+      {
+        "id": "step010",
+        "type": "sendWhatsAppActivity",
+        "label": "Confirma produto",
+        "contents": [
+          {
+            "type": "text/plain",
+            "payload": {
+              "text": "Certo, confirma \"#{resposta}\"?"
+            }
+          }
+        ]
+      },
+      {
+        "id": "step023",
+        "type": "sendWhatsAppActivity",
+        "label": "Apaga item",
+        "properties": {
+          "from": "#{session['whatsappFrom']}"
+        },
+        "contents": [
+          {
+            "type": "text/plain",
+            "payload": {
+              "text": "Ok, #{userName}, apagando #{answer}! "
+            }
+          }
+        ]
+      },
+      {
+        "id": "idEventoFinal",
+        "type": "endEvent",
+        "label": "label 3",
+        "properties": {
+          "endEvent": "true"
+        }
+      },
+      {
+        "id": "step08",
+        "type": "whatsappEvent",
+        "label": "Usuário envia produto",
+        "variables": {
+          "resposta": "payload"
+        }
+      },
+      {
+        "id": "step012",
+        "type": "sendWhatsAppActivity",
+        "label": "Lista Itens",
+        "properties": {
+          "from": "#{session['whatsappFrom']}"
+        },
+        "contents": [
+          {
+            "type": "text/plain",
+            "payload": {
+              "text": "Seus itens são:\n(Dados do banco de dados do carrinho)"
+            }
+          }
+        ]
+      },
+      {
+        "id": "step015",
+        "type": "sendWhatsAppActivity",
+        "properties": {
+          "from": "#{session['whatsappFrom']}"
+        },
+        "contents": [
+          {
+            "type": "text/plain",
+            "payload": {
+              "text": "Hmmm, não entendi... Poderia me informar novamente, por favor?"
+            }
+          }
+        ]
+      },
+      {
+        "id": "step06",
+        "type": "sendWhatsAppActivity",
+        "label": "Mensagem inválida",
+        "properties": {
+          "from": "#{session['whatsappFrom']}"
+        },
+        "contents": [
+          {
+            "type": "text/plain",
+            "payload": {
+              "text": "Hmmm, não entendi... Digite novamente por favor."
+            }
+          }
+        ]
+      },
+      {
+        "id": "step040",
+        "type": "sendWhatsAppActivity",
+        "label": "Resposta inválida",
+        "properties": {
+          "from": "#{session['whatsappFrom']}"
+        },
+        "contents": [
+          {
+            "type": "text/plain",
+            "payload": {
+              "text": "Hmm, não entendi... Qual marca você gostaria de escolher?"
+            }
+          }
+        ]
+      },
+      {
+        "id": "step038",
+        "type": "branch",
+        "label": "Confirma a marca"
+      },
+      {
+        "id": "idEventoInicial",
+        "type": "whatsappEvent",
+        "label": "Contato do usuário",
+        "properties": {
+          "startEvent": "true",
+          "appId": "whatsapp_chatbot",
+          "appType": "chatbot"
+        },
+        "variables": {
+          "whatsappFrom": "'dashing-bongo'",
+          "userName": "visitor.firstName"
+        },
+        "conditions": [
+          {
+            "type": "channelSourceCondition",
+            "values": [
+              "dashing-bongo"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "step029",
+        "type": "branch",
+        "label": "Escolher modalidade"
+      },
+      {
+        "id": "step0",
+        "type": "sendWhatsAppActivity",
+        "label": "Manda mensagem ao usuário",
+        "properties": {
+          "from": "#{session['whatsappFrom']}"
+        },
+        "contents": [
+          {
+            "type": "text/plain",
+            "payload": {
+              "text": "Olá, #{userName}! Seja muito(a) bem-vindo(a) ao nosso canal de compras! Sou o Assistente Virtual da Supermarket Rápido e vou lhe ajudar a fazer suas compras sem sair de casa! Quando desejar, digite qualquer caractere para exibir nosso estoque!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "step020",
+        "type": "sendWhatsAppActivity",
+        "label": "Confirma apagar",
+        "properties": {
+          "from": "#{session['whatsappFrom']}"
+        },
+        "contents": [
+          {
+            "type": "text/plain",
+            "payload": {
+              "text": "Ok, você quer apagar \"#{answer}\"?"
+            }
+          }
+        ]
+      },
+      {
+        "id": "step025",
+        "type": "sendWhatsAppActivity",
+        "label": "Inválida",
+        "properties": {
+          "from": "#{session['whatsappFrom']}"
+        },
+        "contents": [
+          {
+            "type": "text/plain",
+            "payload": {
+              "text": "Hmmm, não entendi... Você quer apagar?"
+            }
+          }
+        ]
+      },
+      {
+        "id": "step019",
+        "type": "whatsappEvent",
+        "label": "Usuário escolhe",
+        "variables": {
+          "answer": "payload"
+        }
+      },
+      {
+        "id": "step018",
+        "type": "sendWhatsAppActivity",
+        "label": "Escolhe apagar produto",
+        "contents": [
+          {
+            "type": "text/plain",
+            "payload": {
+              "text": "Certo, qual produto você deseja apagar do seu carrinho?"
+            }
+          }
+        ]
+      },
+      {
+        "id": "step09",
+        "type": "whatsappEvent",
+        "label": "Usuário responde",
+        "variables": {
+          "confirma": "payload"
+        }
+      },
+      {
+        "id": "step011",
+        "type": "branch",
+        "label": "lista, cria, finaliza, deleta"
+      },
+      {
+        "id": "step030",
+        "type": "sendWhatsAppActivity",
+        "label": "Pagar por dinheiro",
+        "contents": [
+          {
+            "type": "text/plain",
+            "payload": {
+              "text": "Ok, o valor total da sua compra é (valor total: banco de dados do carrinho), pago em dinheiro! Fechou! Até mais!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "step022",
+        "type": "branch",
+        "label": "Confirma se apaga"
+      },
+      {
+        "id": "step026",
+        "type": "sendWhatsAppActivity",
+        "label": "Quantidade",
+        "properties": {
+          "from": "#{session['whatsappFrom']}"
+        },
+        "contents": [
+          {
+            "type": "text/plain",
+            "payload": {
+              "text": "Quantas unidades de \"#{resposta}\" você gostaria de adicionar?"
+            }
+          }
+        ]
+      },
+      {
+        "id": "step028",
+        "type": "whatsappEvent",
+        "label": "Modalidade de Pagamento",
+        "variables": {
+          "modPagamento": "payload"
+        }
+      },
+      {
+        "id": "step013",
+        "type": "sendWhatsAppActivity",
+        "label": "Adiciona mais um produto",
+        "properties": {
+          "from": "#{session['whatsappFrom']}"
+        },
+        "contents": [
+          {
+            "type": "text/plain",
+            "payload": {
+              "text": "Ok, qual produto você gostaria de adicionar? \nNosso estoque:\n(Lista o banco de dados)"
+            }
+          }
+        ]
+      },
+      {
+        "id": "step031",
+        "type": "sendWhatsAppActivity",
+        "label": "Pagar por cartDeb",
+        "contents": [
+          {
+            "type": "text/plain",
+            "payload": {
+              "text": "Ok, o valor total da sua compra é (valor total: banco de dados do carrinho), pago no cartão de débito! Fechou! Até mais!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "step05",
+        "type": "sendWhatsAppActivity",
+        "label": "Redigitar o produto",
+        "properties": {
+          "from": "#{session['whatsappFrom']}"
+        },
+        "contents": [
+          {
+            "type": "text/plain",
+            "payload": {
+              "text": "Ok, de qual produto vc gostaria?"
+            }
+          }
+        ]
+      },
+      {
+        "id": "step014",
+        "type": "sendWhatsAppActivity",
+        "label": "Finalizar compra",
+        "properties": {
+          "from": "#{session['whatsappFrom']}"
+        },
+        "contents": [
+          {
+            "type": "text/plain",
+            "payload": {
+              "text": "Ok, sua compra está quase pronta! Qual seria a modalidade de pagamento? Digite...\n- \"cc\" para cartão de crédito;\n- \"cd\" para cartão de débito;\n- \"din\" para dinheiro"
+            }
+          }
+        ]
+      },
+      {
+        "id": "step0132",
+        "type": "sendWhatsAppActivity",
+        "properties": {
+          "from": "#{session['whatsappFrom']}"
+        },
+        "contents": [
+          {
+            "type": "text/plain",
+            "payload": {
+              "text": "Só lembrando:\n- \"listar\" para visualizar o seu carrinho;\n- \"apagar\" para tirar algum item;\n- \"add\" para adicionar outro;\n- \"fim\" para finalizar seu pedido."
+            }
+          }
+        ]
+      },
+      {
+        "id": "step039",
+        "type": "sendWhatsAppActivity",
+        "label": "Nega marca",
+        "properties": {
+          "from": "#{session['whatsappFrom']}"
+        },
+        "contents": [
+          {
+            "type": "text/plain",
+            "payload": {
+              "text": "Ok, escolha novamente."
+            }
+          }
+        ]
+      },
+      {
+        "id": "step03",
+        "type": "branch",
+        "label": "Confirma produto"
+      }
+    ],
+    "connections": [
+      {
+        "from": "step041",
+        "to": "step038"
+      },
+      {
+        "from": "step024",
+        "to": "step0132"
+      },
+      {
+        "from": "step038",
+        "to": "step040",
+        "label": "Invalid",
+        "isDefault": true
+      },
+      {
+        "from": "step016",
+        "to": "step011"
+      },
+      {
+        "from": "step028",
+        "to": "step029"
+      },
+      {
+        "from": "step026",
+        "to": "step027"
+      },
+      {
+        "from": "step039",
+        "to": "step034"
+      },
+      {
+        "from": "step014",
+        "to": "step028"
+      },
+      {
+        "from": "step07",
+        "to": "step08"
+      },
+      {
+        "from": "step010",
+        "to": "step09"
+      },
+      {
+        "from": "step038",
+        "to": "step039",
+        "label": "não",
+        "conditions": [
+          {
+            "type": "keywordCondition",
+            "values": [
+              "não",
+              "n",
+              "nope"
+            ]
+          }
+        ]
+      },
+      {
+        "from": "step018",
+        "to": "step019"
+      },
+      {
+        "from": "step033",
+        "to": "step028"
+      },
+      {
+        "from": "step011",
+        "to": "step013",
+        "label": "cria",
+        "conditions": [
+          {
+            "type": "keywordCondition",
+            "values": [
+              "add"
+            ]
+          }
+        ]
+      },
+      {
+        "from": "step029",
+        "to": "step033",
+        "label": "Invalid",
+        "isDefault": true
+      },
+      {
+        "from": "step04",
+        "to": "step016"
+      },
+      {
+        "from": "step029",
+        "to": "step032",
+        "label": "cartaoCredito",
+        "conditions": [
+          {
+            "type": "keywordCondition",
+            "values": [
+              "cc"
+            ]
+          }
+        ]
+      },
+      {
+        "from": "step08",
+        "to": "step010"
+      },
+      {
+        "from": "step038",
+        "to": "step026",
+        "label": "sim",
+        "conditions": [
+          {
+            "type": "keywordCondition",
+            "values": [
+              "sim",
+              "s",
+              "isso",
+              "pode",
+              "confirma"
+            ]
+          }
+        ]
+      },
+      {
+        "from": "step027",
+        "to": "step04"
+      },
+      {
+        "from": "step011",
+        "to": "step018",
+        "label": "deleta",
+        "conditions": [
+          {
+            "type": "keywordCondition",
+            "values": [
+              "apagar"
+            ]
+          }
+        ]
+      },
+      {
+        "from": "step035",
+        "to": "step036"
+      },
+      {
+        "from": "step011",
+        "to": "step015",
+        "label": "Invalid",
+        "isDefault": true
+      },
+      {
+        "from": "step025",
+        "to": "step021"
+      },
+      {
+        "from": "step05",
+        "to": "step08"
+      },
+      {
+        "from": "step017",
+        "to": "step010"
+      },
+      {
+        "from": "step023",
+        "to": "step0132"
+      },
+      {
+        "from": "step03",
+        "to": "step034",
+        "label": "sim",
+        "conditions": [
+          {
+            "type": "keywordCondition",
+            "values": [
+              "sim",
+              "s",
+              "isso",
+              "manda",
+              "ver",
+              "certo"
+            ]
+          }
+        ]
+      },
+      {
+        "from": "idEventoInicial",
+        "to": "step0"
+      },
+      {
+        "from": "step034",
+        "to": "step035"
+      },
+      {
+        "from": "step031",
+        "to": "idEventoFinal"
+      },
+      {
+        "from": "step0",
+        "to": "step02"
+      },
+      {
+        "from": "step030",
+        "to": "idEventoFinal"
+      },
+      {
+        "from": "step020",
+        "to": "step021"
+      },
+      {
+        "from": "step0132",
+        "to": "step016"
+      },
+      {
+        "from": "step029",
+        "to": "step031",
+        "label": "cartaoDebito",
+        "conditions": [
+          {
+            "type": "keywordCondition",
+            "values": [
+              "cd"
+            ]
+          }
+        ]
+      },
+      {
+        "from": "step021",
+        "to": "step022"
+      },
+      {
+        "from": "step032",
+        "to": "idEventoFinal"
+      },
+      {
+        "from": "step06",
+        "to": "step08"
+      },
+      {
+        "from": "step040",
+        "to": "step034"
+      },
+      {
+        "from": "step029",
+        "to": "step030",
+        "label": "dinheiro",
+        "conditions": [
+          {
+            "type": "keywordCondition",
+            "values": [
+              "din"
+            ]
+          }
+        ]
+      },
+      {
+        "from": "step03",
+        "to": "step05",
+        "label": "não",
+        "conditions": [
+          {
+            "type": "keywordCondition",
+            "values": [
+              "não",
+              "nao",
+              "n",
+              "nope"
+            ]
+          }
+        ]
+      },
+      {
+        "from": "step011",
+        "to": "step014",
+        "label": "finaliza",
+        "conditions": [
+          {
+            "type": "keywordCondition",
+            "values": [
+              "fim"
+            ]
+          }
+        ]
+      },
+      {
+        "from": "step011",
+        "to": "step012",
+        "label": "lista",
+        "conditions": [
+          {
+            "type": "keywordCondition",
+            "values": [
+              "listar"
+            ]
+          }
+        ]
+      },
+      {
+        "from": "step03",
+        "to": "step06",
+        "label": "Invalid",
+        "isDefault": true
+      },
+      {
+        "from": "step02",
+        "to": "step07"
+      },
+      {
+        "from": "step022",
+        "to": "step024",
+        "label": "não",
+        "conditions": [
+          {
+            "type": "keywordCondition",
+            "values": [
+              "não",
+              "nao",
+              "n"
+            ]
+          }
+        ]
+      },
+      {
+        "from": "step022",
+        "to": "step025",
+        "label": "Invalid",
+        "isDefault": true
+      },
+      {
+        "from": "step019",
+        "to": "step020"
+      },
+      {
+        "from": "step09",
+        "to": "step03"
+      },
+      {
+        "from": "step022",
+        "to": "step023",
+        "label": "sim",
+        "conditions": [
+          {
+            "type": "keywordCondition",
+            "values": [
+              "sim",
+              "s",
+              "isso"
+            ]
+          }
+        ]
+      },
+      {
+        "from": "step036",
+        "to": "step041"
+      },
+      {
+        "from": "step013",
+        "to": "step017"
+      },
+      {
+        "from": "step015",
+        "to": "step0132"
+      },
+      {
+        "from": "step012",
+        "to": "step0132"
+      }
+    ],
+    "defaultConversationalChannel": "WHATSAPP"
+  }
