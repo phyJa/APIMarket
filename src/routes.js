@@ -1,4 +1,5 @@
 const express = require('express'); 
+const ItemController = require('./controllers/ItemController');
 const router = express.Router();
 
 const ProductController = require('./controllers/ProductController');
@@ -13,5 +14,6 @@ router.post('/products', ProductValidation, ProductController.create);
 router.put('/products/item/:id', ProductValidation, ProductController.update);
 router.delete('/products/item/:id', ProductController.delete);
 
+router.post('/cart', ItemController.create);
 
 module.exports = router;
